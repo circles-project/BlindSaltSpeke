@@ -17,8 +17,8 @@ public struct BlindSaltSpeke {
         public init(serverId: String, clientId: String, salt: [UInt8]) {
             self.salt = salt
             Cbsspeke.bsspeke_server_init(&Cctx,
-                                         serverId, serverId.utf8CString.count,
-                                         clientId, clientId.utf8CString.count)
+                                         serverId, serverId.utf8CString.count-1, // Subtract 1 because .count includes the trailing \0
+                                         clientId, clientId.utf8CString.count-1) // Subtract 1 because .count includes the trailing \0
         }
         
         public func blindSalt(blind: [UInt8]) throws -> [UInt8] {
