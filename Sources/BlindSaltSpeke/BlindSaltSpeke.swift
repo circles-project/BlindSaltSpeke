@@ -73,8 +73,8 @@ public struct BlindSaltSpeke {
         public init(clientId: String, serverId: String, password: String) throws {
             let rc: Int32
             rc = Cbsspeke.bsspeke_client_init(&Cctx,
-                                              clientId, clientId.utf8CString.count,
-                                              serverId, serverId.utf8CString.count,
+                                              clientId, clientId.utf8CString.count-1,
+                                              serverId, serverId.utf8CString.count-1,
                                               password, password.utf8CString.count)
             if rc != 0 {
                 throw BSSpekeError(msg: "Failed to initialize client (rc = \(rc)")
