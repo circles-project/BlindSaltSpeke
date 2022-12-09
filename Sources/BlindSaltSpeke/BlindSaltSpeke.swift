@@ -75,7 +75,7 @@ public struct BlindSaltSpeke {
             rc = Cbsspeke.bsspeke_client_init(&Cctx,
                                               clientId, clientId.utf8CString.count-1,
                                               serverId, serverId.utf8CString.count-1,
-                                              password, password.utf8CString.count)
+                                              password, password.utf8CString.count-1)
             if rc != 0 {
                 throw BSSpekeError(msg: "Failed to initialize client (rc = \(rc)")
             }
