@@ -142,5 +142,18 @@ public struct BlindSaltSpeke {
             
             return rc == 0
         }
+        
+        public func generateHashedKey(label: String) -> [UInt8] {
+            var key: [UInt8] = .init(repeating: 0, count: 32)
+            
+            key.withUnsafeMutableBufferPointer { keyPtr in
+                let len = label.utf8.count
+                
+                label.withCString { msg in
+                    Cbsspeke.bsspeke_client_generate_hashed_key(keyPtr.baseAddress, msg, len, &Cctx)
+                }
+            }
+            return key
+        }
     }
 }
